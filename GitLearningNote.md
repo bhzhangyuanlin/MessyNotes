@@ -252,3 +252,17 @@ git reflog 默认大部分reflog可以保留3个月
 还有一个IntelLiJ IDEA软件
 ```
 
+## 10. 修改remote origin
+
+```
+法一：
+git remote set-url origin url
+
+法二：
+git remote rm origin
+git remote add origin url
+
+法三：
+打开本地的,git文件进行修改
+```
+
