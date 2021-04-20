@@ -38,8 +38,8 @@ git push origin HEAD:master 通过push推送上去，origin表示地址，HEAD�
    git rm --cache filename 将暂存区中的filename文件进行删除
    
 ```
+![](images/GitLearnNote/image-20210420172402449.png)
 
-   <img src="C:\Users\bhzha\AppData\Roaming\Typora\typora-user-images\image-20210420172402449.png" alt="image-20210420172402449" style="zoom:80%;" />
 
 ## 4. 查看工作区状态
 
@@ -175,8 +175,7 @@ git push origin :branch 删除远端分支
 git checkout branchname 先切换到某个分支
 git rebase master 将某个分支合并到主分支后面，具体看下图，会重新提交，哈希值不一样
 ```
-
-![image-20210420220145954](C:\Users\bhzha\AppData\Roaming\Typora\typora-user-images\image-20210420220145954.png)
+![](images/GitLearnNote/image-20210420220145954.png)
 
 ## 8. git常用命令 修改历史
 
@@ -191,8 +190,8 @@ git revert commit-id 通过git log可以查看之前的提交的commit-id，这�
 ```shell
 git cherry-pick branchname 比如下图将上面那个分支的内容拿到下面分支后面，就应该先切换到下面分支，然后运行 git cherry-pick 上面分支名字，这里两个分支的哈希值不一样，是重新提交的
 ```
+![](images/GitLearnNote/image-20210420221404166.png)
 
-![image-20210420221404166](C:\Users\bhzha\AppData\Roaming\Typora\typora-user-images\image-20210420221404166.png)
 
 * 修改前一个提交
 
