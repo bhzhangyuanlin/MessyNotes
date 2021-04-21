@@ -76,7 +76,7 @@ git log --pretty=format:"%h-%an,%ar:%s" 自定义格式，选项参考下面的�
 git show commit-id 可以查看某个哈希值下的具体的改动的内容
 ```
 
-![](./images/GitLearnNote/image-20210420180417071.png)
+<img src="./images/GitLearnNote/image-20210420180417071.png" style="zoom:90%;" />
 
 ## 6. Git 常用命令 操作文件
    * git config 配置基本信息
@@ -175,7 +175,7 @@ git push origin :branch 删除远端分支
 git checkout branchname 先切换到某个分支
 git rebase master 将某个分支合并到主分支后面，具体看下图，会重新提交，哈希值不一样
 ```
-![](./images/GitLearnNote/image-20210420220145954.png)
+<img src="./images/GitLearnNote/image-20210420220145954.png" style="zoom:80%;" />
 
 ## 8. git常用命令 修改历史
 
@@ -190,7 +190,7 @@ git revert commit-id 通过git log可以查看之前的提交的commit-id，这�
 ```shell
 git cherry-pick branchname 比如下图将上面那个分支的内容拿到下面分支后面，就应该先切换到下面分支，然后运行 git cherry-pick 上面分支名字，这里两个分支的哈希值不一样，是重新提交的
 ```
-![](./images/GitLearnNote/image-20210420221404166.png)
+<img src="./images/GitLearnNote/image-20210420221404166.png" style="zoom:80%;" />
 
 
 * 修改前一个提交
