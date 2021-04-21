@@ -265,3 +265,10 @@ git remote add origin url
 打开本地的,git文件进行修改
 ```
 
+## 11. 远程库和版本库不一致问题解决
+
+```
+首先push会报错，提示error: failed to push some refs to 'https://github.com/xxxxxx/
+执行 git pull --rebase origin master该命令的意思是把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。出现如下图执行pull执行成功后，可以成功执行git push origin master操作。
+```
+
