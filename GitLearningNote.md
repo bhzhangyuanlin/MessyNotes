@@ -38,7 +38,7 @@ git push origin HEAD:master 通过push推送上去，origin表示地址，HEAD�
    git rm --cache filename 将暂存区中的filename文件进行删除
    
 ```
-![](./images/GitLearnNote/image-20210420172402449.png)
+![](images/GitLearnNote/image-20210420172402449.png)
 
 
 ## 4. 查看工作区状态
