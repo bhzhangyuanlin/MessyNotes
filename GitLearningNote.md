@@ -17,17 +17,55 @@ git commit -m "xxxxx" 含有提交信息的这样提交，一般交互式的界�
 
 git commit 直接这样，然后会要求提交一个说明，对于Git来说，每一个提交都应该有一个说明，说明取决于公司或者项目规范，一般第一行写一个小摘要，空一行写具体实现的内容
 
-git log 可以查看之前的说明
+git log 可以查看之前的版本 
+git log --pretty=oneline 仅一行来显示，或者 git log --oneline 这样显示更简洁（哈希值缩短了）,但是只能显示历史版本，不能显示当前版本之后的版本
+git log reflog 会比上面的指令显示更多的信息
 
-推送改动
+版本回退/前进
+git reset --hard [哈希值] 可以回退以及前进(推荐这个方法)
+git reset --hard HEAD^ 只能回退版本，一个乘方表示回退一个版本
+git reset --hard HEAD~n 只能回退，表示回退n步
+
+内容比较（git是以行为单位进行比较的）
+git diff [filename] 此时是和工作区文件进行比较的
+git diff HEAD [filename] 此时是和本地库的文件进行比较的
+git diff HEAD^ [filename] 和上一班版本的本地库的内容进行比较
+以上内容不带文件名会比较多个文件
+
+分支管理
+git branch -v 可以查看所有的分支
+git branch [branch name] 新建新的分支
+git checkout [branch name] 切换到对应的分支
+git merge [branch name] 将后面的分支名称对应的分支合并到当前所在的分支
+注：合并分支的时候，一定要在master分支，就是要修改哪个分支就处在哪个分支上，才可以进行合并
+存在合并冲突的时候（可能是不同人修改了同一个文件）需要手动的选择，git会在冲突的文件里边作出相应的标记，HEAD至等号之间的内容表示当前所处分支修改的内容，等号至后面分支名的内容是另外一个要合并的分支的内容，查看后，要手动删除这些git添加的内容，然后git add [filename](此时处在待合并状态),然后git commit -m "日志"提交了就好了，记得commit后不加任何其他的内容
+
+推送的远程库
 git remote add origin ttps://github.com/bhzhangyuanlin/VnoteSync.git 这里是先要初始化远端服务器地址，通过remote add添加远端服务器，origin是给远端服务器命名，默认就是origin
-
 git remote -v 可以查看当前远端服务器地址
-git push origin HEAD:master 通过push推送上去，origin表示地址，HEAD表示当前本地的点，master表示提交到远端master分支。
+git push origin HEAD:master 通过push推送上去，origin表示地址，HEAD表示当前本地的点，master表示提交到远端的是master分支
 
-已经有了一个远端的库，把远端库的文件克隆下来
-走https协议：git clone url 需要用户名和账号密码的验证
-走ssh协议：ssh协议要求输入公钥和私钥进行验证，需要现在远端库进行设置，设置一个ssh公钥，还要设置一个私钥。一般github，gitee会有如何设置公钥，公钥记得添加到账户下，而不是具体的项目下。使用指令在电脑上生成了公钥之后，添加到远端服务器上，也会生成私钥，私钥是id_rsa，公钥是.pub扩展名那个。
+克隆远程库的内容（已经有了一个远端的库，把远端库的文件克隆下来）
+走https协议：git clone url 
+1）完整的把远程库下载到本地；2）创建origin远程地址别名（还是原来的仓库的地址）；3）初始化本地库
+git clone -b branchname url 可以克隆不同的分支
+因为clone之后会初始化本地仓库，以及自动添加了origin远程仓库别名，所以push的话是需要原仓库作者允许才可以，在github -> Settings -> Collaborators然后通过邮箱来查找用户，然后添加后，复制邀请链接，发送给对应的用户，他点击登录之后就可以接受邀请了，变成团队成员就可以push了
+
+拉取操作
+pull = fetch + merge
+git fetch [远程仓库别名] [远程分支名]
+相当于先git fetch origin master下载了，然后使用git checkout origin/master切换到远程仓库的master分支，然后cat文件，查看修改，之后用下面的语句合并
+git merge [远程仓库别名/远程分支名]
+git pull [远程仓库别名] [远程分支名]
+
+多团队协作fork操作
+1. A将自己的仓库地址发给B，B点击后，fork一下，然后就相当于在自己的仓库里新建了一个属于自己的
+2. 然后B可以git clone url 下载了
+3. 然后B可以随意自己修改，修改之后push到远程仓库，然后登陆github，然后在仓库里有一个pull request的按钮，点击，然后填写一下各种信息，然后creat pull      	request就好了
+4. 然后A点击pull request，则可以查看B发给A的信息，然后可以与B进行沟通，或者A可以点击Files changed查看B做的修改，觉得没问题，就可以merge了
+
+win10走http协议比较方便，对于其他的走ssh协议比较方便（具体的内容和操作可以参照PDF）
+走ssh协议：ssh协议要求输入公钥和私钥进行验证，需要先在远端库进行设置，设置一个ssh公钥，还要设置一个私钥。一般github，gitee会有如何设置公钥，公钥记得添加到账户下，而不是具体的项目下。使用指令在电脑上生成了公钥之后，添加到远端服务器上，也会生成私钥，私钥是id_rsa，公钥是.pub扩展名那个。
 
 在远端服务器设置了公钥之后，那么你的本地的私钥和公钥就已经匹配了，那么久不需要密码验证，就可以remote add了
 ```
